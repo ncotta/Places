@@ -5,7 +5,10 @@ lines = []
 list_of_files = glob.glob('./*.json')
 for file_name in list_of_files:
     with open(file_name) as f:
-        content = f.readlines()
+        try:
+            content = f.readlines()
+        except UnicodeDecodeError:
+            print("Could not read (Invalid character in file): " + file_name)
 
     content = [x.strip() for x in content]
 
